@@ -143,6 +143,6 @@ const bootstrap = async () => {
   }
 };
 */
-module.exports.handler = serverless(app);
+//module.exports.handler = serverless(app);
 
 bootstrap();
