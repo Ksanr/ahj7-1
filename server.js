@@ -1,14 +1,20 @@
-import express from "express";
+//import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import * as crypto from "crypto";
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
+const express = require('express');
+const serverless = require('serverless-http');
 
 const app = express();
 const logger = pino(pinoPretty());
 
-app.use(cors());
+//app.use(cors());
+app.use(cors({
+    origin: process.env.CORS_ORIGIN
+}));
+
 app.use(
   bodyParser.json({
     type(req) {
@@ -122,7 +128,11 @@ app.use(async (request, response) => {
 });
 
 const port = process.env.PORT || 7070;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
+/*
 const bootstrap = async () => {
   try {
     app.listen(port, () =>
@@ -132,5 +142,7 @@ const bootstrap = async () => {
     console.error(error);
   }
 };
+*/
+module.exports.handler = serverless(app);
 
 bootstrap();
