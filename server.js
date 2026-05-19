@@ -4,8 +4,6 @@ import bodyParser from "body-parser";
 import * as crypto from "crypto";
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
-//const express = require('express');
-//const serverless = require('serverless-http');
 
 const app = express();
 const logger = pino(pinoPretty());
