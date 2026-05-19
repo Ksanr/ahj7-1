@@ -8,7 +8,9 @@ import pinoPretty from 'pino-pretty';
 const app = express();
 const logger = pino(pinoPretty());
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || '*'
+}));
 app.use(
   bodyParser.json({
     type(req) {
