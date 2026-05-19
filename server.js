@@ -1,4 +1,4 @@
-import express from "express";
+/* import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import * as crypto from "crypto";
@@ -136,3 +136,23 @@ const bootstrap = async () => {
 };
 
 bootstrap();
+
+*/
+
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+app.use(cors()); // разрешаем всё
+
+app.get('/', (req, res) => {
+    if (req.query.method === 'allTickets') {
+        return res.json([
+            { id: '1', name: 'Test ticket', status: false, created: Date.now() }
+        ]);
+    }
+    res.status(400).json({ error: 'Invalid method' });
+});
+
+const PORT = process.env.PORT || 7070;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
